@@ -12,7 +12,6 @@ const TransactionList = ({ transactions }) => {
           transactions.map((t) => {
             // Format date string to human-readable
             const formattedDate = new Date(t.date).toLocaleString();
-
             return (
               <li key={t._id}>
                 {t.type} – ₹{t.amount}

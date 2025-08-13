@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
 import TransactionChart from "./components/TransactionChart";
+import TransactionList from "./components/TransactionList";
 
 const API_URL = "http://localhost:5000/api/transactions";
 
@@ -109,23 +110,6 @@ const AddTransactionBox = ({ label, buttonLabel, onAdd }) => {
       />
       <button type="submit">{buttonLabel}</button>
     </form>
-  );
-};
-
-const TransactionList = ({ transactions }) => {
-  return (
-    <div className="transaction-list">
-      <h3>All Transactions</h3>
-      <ul>
-        {transactions.length === 0 && <li>No transactions yet</li>}
-        {transactions.map((t) => (
-          <li key={t._id} className={t.type}>
-            <strong>{t.type.toUpperCase()}</strong> - ₹{t.amount}
-            {t.description && `: ${t.description}`}
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 };
 
