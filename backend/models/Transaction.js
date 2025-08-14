@@ -1,22 +1,35 @@
+// backend/models/Transaction.js
 const mongoose = require("mongoose");
 
-const transactionSchema = new mongoose.Schema({
-  type: {
-    type: String,
-    enum: ["income", "expense"],
-    required: true,
+const transactionSchema = new mongoose.Schema(
+  {
+    type: {
+      type: String,
+      required: true,
+      enum: ["income", "expense"],
+    },
+    amount: {
+      type: Number,
+      required: true,
+    },
+    description: {
+      type: String,
+      default: "",
+    },
+    date: {
+      type: Date,
+      required: true,
+      default: Date.now, // automatically sets current date if not provided
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
-  amount: {
-    type: Number,
-    required: true,
+  {
+    timestamps: true, // still keeping this — it adds createdAt & updatedAt
   },
-  description: {
-    type: String,
-  },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-});
+);
 
 module.exports = mongoose.model("Transaction", transactionSchema);
